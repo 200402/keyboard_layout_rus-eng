@@ -18,7 +18,6 @@ namespace RasklKlavi
             this.KeyPreview = true;
         }
 
-
         globalKeyboardHook gkh = new globalKeyboardHook();
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -57,22 +56,23 @@ namespace RasklKlavi
             gkh.HookedKeys.Add(Keys.OemPeriod);
             gkh.HookedKeys.Add(Keys.Oem2);
             gkh.HookedKeys.Add(Keys.Space);
-            //
-            // и т.п.
+
             gkh.KeyUp += new KeyEventHandler(gkh_KeyUp);
         }
-            
-        void gkh_KeyUp(object sender, KeyEventArgs e)
+
+        private void gkh_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Tab)
+
+
+            if (e.KeyCode == Keys.Q)
             {
                 //Если в буфере обмен содержится текст
                 if (Clipboard.ContainsText() == true)
                 {
                     //Извлекаем (точнее копируем) его и сохраняем в переменную
                     string someText = Clipboard.GetText();
-
-                    //Выводим показываем сообщение с текстом, скопированным из буфера обмена
+                    MessageBox.Show(this, someText, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    createDB.Eng();
                     MessageBox.Show(this, someText, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
@@ -108,8 +108,8 @@ namespace RasklKlavi
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            //notifyIcon1.Visible = true;
             //this.Hide();
+            //notifyIcon1.Visible = true;
         }
     }
 }
